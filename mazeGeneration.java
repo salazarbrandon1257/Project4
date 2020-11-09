@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class mazeGeneration{
 
@@ -44,7 +44,19 @@ public class mazeGeneration{
 
 
     public static void main(String[] args){ 
-        DisjSets sets = new DisjSets(10);
+ 
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        Scanner myObj2 = new Scanner(System.in);  // Create a Scanner object
+        int elementNumber;
+        System.out.println("Input a value for the row number(Integer < 20): ");
+        String userInput = myObj.nextLine();  // Read user input
+        System.out.println("Input a value for the column number(Integer < 20): ");
+        String userInput2 = myObj2.nextLine();  // Read user input
+
+        elementNumber = Integer.parseInt(userInput) * Integer.parseInt(userInput2);
+        System.out.println(elementNumber);
+
+        DisjSets sets = new DisjSets(elementNumber);
         System.out.println(sets.find(1));
         sets.union(0, 1);
         System.out.println(sets.find(1));
