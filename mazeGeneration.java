@@ -15,7 +15,41 @@ public class mazeGeneration{
             wallList.add(i);
         }
         System.out.println(Arrays.toString(wallList.toArray()));
+        mazeUi();
     }
+    public void mazeUi(){
+        int[] counter = new int[elemNumber];
+        for (int i = 0; i < col; i++){
+            System.out.print("_  ");
+        }
+        System.out.println("");
+        for (int i = 0; i < wallList.size(); i++){
+            if (i > elemNumber - 1){
+                counter[i % elemNumber] += 2;
+            }else{
+                counter[i % elemNumber] += 1;
+            }
+        }
+        for (int i = 0; i < counter.length; i++){
+            if (counter[i] == 1){
+                System.out.print("| ");
+            }
+            else if (counter[i] == 2){
+                System.out.print(" _ ");
+            }
+            else if (counter[i] == 3){
+                System.out.print("|_ ");
+            }
+            if (i % col == col - 1){
+                System.out.println("");
+            }
+        }
+        System.out.println("");
+    }
+//  _  _ 
+// |_ _
+// |_ 
+
     public void generateMaze(){
         DisjSets sets = new DisjSets(elemNumber);
         int count = 0;
