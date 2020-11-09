@@ -18,6 +18,7 @@ public class mazeGeneration{
     }
     public void mazeUi(){
         int[] counter = new int[elemNumber];
+        System.out.print("   ");
         for (int i = 0; i < col; i++){
             System.out.print(" _ ");
 
@@ -48,10 +49,12 @@ public class mazeGeneration{
             }
         }
         System.out.println("");
+        /*
         System.out.print("counter array: ");
         System.out.println(Arrays.toString(counter));
         System.out.print("walllist: ");
         System.out.println(Arrays.toString(wallList.toArray()));
+        */
     }
     public void generateMaze(){
         DisjSets sets = new DisjSets(elemNumber);
@@ -62,30 +65,38 @@ public class mazeGeneration{
             int random2 = wallList.get(random);
             if (random2 % col != 0 && random2 < elemNumber){
                 if (sets.find(random2 - 1) != sets.find(random2)){
-                    sets.union(sets.find(random2 - 1), sets.find(random2));
+                    if ( sets.find(random2) == 0){
+                        sets.union(sets.find(random2), sets.find(random2 - 1));
+                    }else{
+                        sets.union(sets.find(random2 - 1), sets.find(random2));
+                    }
                     //for (int i = 0; i < wallList.size(); i++){
                       //  if (wallList.get(i) == random)
                         //    wallList.remove(i);
                     //}
                     wallList.remove(random);
-                    count++;
-                    /*
+                    count++; /*
                     System.out.println(Arrays.toString(wallList.toArray()));
                     System.out.println(sets.find(random));
                     System.out.print("sets.find(elem -1): ");
                     System.out.println(sets.find(elemNumber - 1));
                     */
+                    
                 }
-                System.out.print("error here?: 1 ");
-                System.out.println(random2);
+                // System.out.print("error here?: 1 ");
+                //System.out.println(random2);
             }
-            System.out.print("error here?: ");               
-            System.out.println(random2);
+            //System.out.print("error here?: ");               
+            //System.out.println(random2);
 
             if (sets.find(elemNumber - 1) == 0){break;}
             if (random2 < elemNumber * 2 - col && random2 > elemNumber - 1){
                 if (sets.find(random2 - elemNumber) != sets.find(random2 + col - elemNumber)){
-                    sets.union(sets.find(random2 - elemNumber), sets.find(random2 + col - elemNumber));
+                    if (sets.find(random2 + col - elemNumber) == 0){
+                        sets.union(sets.find(random2 + col - elemNumber), sets.find(random2 - elemNumber)); 
+                    }else{
+                        sets.union(sets.find(random2 - elemNumber), sets.find(random2 + col - elemNumber));
+                    }
                     wallList.remove(random);
                     count++;
                     /*
@@ -102,6 +113,7 @@ public class mazeGeneration{
                     System.out.print("find: ");
                     System.out.println(sets.find(random2 + col - elemNumber));
                     */
+                    
                 }
                 //System.out.println("error here?: 2");
             }
