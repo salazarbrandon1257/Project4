@@ -6,14 +6,27 @@ public class mazeGeneration{
 
     public mazeGeneration(int n){
         elemNumber = n;
-        wallList = new ArrayList<>(n * 2);
+        wallList = new ArrayList<>();
+        for (int i = 0; i < n * 2; i++){
+            wallList.add(i);
+        }
+        System.out.println(Arrays.toString(wallList.toArray()));
     }
     public void generateMaze(){
         DisjSets sets = new DisjSets(elemNumber);
+        int n = 0;
         while (sets.find(elemNumber - 1) != 0){
             Random rand = new Random(); 
-            int random = rand.nextInt(elemNumber * 2); 
-            System.out.println(random);
+            int random = rand.nextInt((elemNumber * 2) - n) ; 
+            if (random % 4 != 0 && random < elemNumber){
+                if (sets.find(random - 1) != sets.find(random)){
+                    sets.union(random - 1, random);
+                    wallList.remove(random);
+                    n++;
+                }
+                System.out.println(Arrays.toString(wallList.toArray()));
+                break;
+            }
         }
     }
 
