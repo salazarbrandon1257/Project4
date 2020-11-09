@@ -19,7 +19,7 @@ public class mazeGeneration{
     public void mazeUi(){
         int[] counter = new int[elemNumber];
         System.out.print("   ");
-        for (int i = 0; i < col; i++){
+        for (int i = 1; i < col; i++){
             System.out.print(" _ ");
 
         }
@@ -31,7 +31,8 @@ public class mazeGeneration{
                 counter[wallList.get(i)] += 1;
             }
         }
-        for (int i = 0; i < counter.length; i++){
+        System.out.print("   ");
+        for (int i = 1; i < counter.length - 1; i++){
             if (counter[i] == 1){
                 System.out.print("|  ");
             }
