@@ -11,36 +11,34 @@ public class mazeGeneration{
         col = m;
         elemNumber = n * m;
         wallList = new ArrayList<>();
-        for (int i = 0; i < n * 2; i++){
+        for (int i = 0; i < elemNumber * 2; i++){
             wallList.add(i);
         }
         System.out.println(Arrays.toString(wallList.toArray()));
     }
     public void generateMaze(){
         DisjSets sets = new DisjSets(elemNumber);
-        int n = 0;
+        int count = 0;
         while (sets.find(elemNumber - 1) != 0){
             Random rand = new Random(); 
-            int random = rand.nextInt((elemNumber * 2) - n) ; 
-            if (random % row != 0 && random < elemNumber){
+            int random = rand.nextInt((elemNumber * 2) - count) ; 
+            if (random % col != 0 && random < elemNumber){
                 if (sets.find(random - 1) != sets.find(random)){
                     sets.union(random - 1, random);
                     wallList.remove(random);
-                    n++;
+                    count++;
                 }
                 System.out.println(Arrays.toString(wallList.toArray()));
                 System.out.println(sets.find(random));
-                break;
             }
-            if (random < elemNumber - row){
-                if (sets.find(random - 1) != sets.find(random)){
-                    sets.union(random - 1, random);
+            if (random < elemNumber * 2 - col && random > elemNumber - 1){
+                if (sets.find(random - elemNumber) != sets.find(random + col - elemNumber)){
+                    sets.union(random - elemNumber, random + col - elemNumber);
                     wallList.remove(random);
-                    n++;
+                    count++;
                 }
                 System.out.println(Arrays.toString(wallList.toArray()));
-                System.out.println(sets.find(random));
-                break;
+                System.out.println(sets.find(random + col - elemNumber));
             }
         }
     }
@@ -91,13 +89,9 @@ public class mazeGeneration{
         String userInput = myObj.nextLine();  // Read user input
         System.out.print("Input a value for the column number(Integer < 20): ");
         String userInput2 = myObj2.nextLine();  // Read user input
-
         mazeGeneration maze = new mazeGeneration(Integer.parseInt(userInput), Integer.parseInt(userInput2));
         maze.generateMaze();
 
-        //System.out.println(sets.find(1));
-        //sets.union(1, 8);
-        //System.out.println(sets.find(8));
         
 
     } 
