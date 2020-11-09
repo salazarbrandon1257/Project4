@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class mazeGeneration{
     int elemNumber;
@@ -11,8 +10,10 @@ public class mazeGeneration{
     }
     public void generateMaze(){
         DisjSets sets = new DisjSets(elemNumber);
-        while (sets.find(elemNumber) != 0){
-
+        while (sets.find(elemNumber - 1) != 0){
+            Random rand = new Random(); 
+            int random = rand.nextInt(elemNumber * 2); 
+            System.out.println(random);
         }
     }
 
@@ -65,9 +66,10 @@ public class mazeGeneration{
         elementNumber = Integer.parseInt(userInput) * Integer.parseInt(userInput2);
 
         mazeGeneration maze = new mazeGeneration(elementNumber);
+        maze.generateMaze();
 
         //System.out.println(sets.find(1));
-        sets.union(1, 8);
+        //sets.union(1, 8);
         //System.out.println(sets.find(8));
         
 
