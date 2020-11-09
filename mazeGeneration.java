@@ -25,20 +25,37 @@ public class mazeGeneration{
             if (random % col != 0 && random < elemNumber){
                 if (sets.find(random - 1) != sets.find(random)){
                     sets.union(random - 1, random);
-                    wallList.remove(random);
+                    for (int i = 0; i < wallList.size(); i++){
+                        if (wallList.get(i) == random)
+                            wallList.remove(i);
+                    }
                     count++;
+                    System.out.println(Arrays.toString(wallList.toArray()));
+                    System.out.println(sets.find(random));
                 }
-                System.out.println(Arrays.toString(wallList.toArray()));
-                System.out.println(sets.find(random));
             }
+            if (sets.find(elemNumber - 1) == 0){break;}
             if (random < elemNumber * 2 - col && random > elemNumber - 1){
                 if (sets.find(random - elemNumber) != sets.find(random + col - elemNumber)){
                     sets.union(random - elemNumber, random + col - elemNumber);
-                    wallList.remove(random);
+                    for (int i = 0; i < wallList.size(); i++){
+                        if (wallList.get(i) == random)
+                            wallList.remove(i);
+                    }
                     count++;
+                    System.out.println(Arrays.toString(wallList.toArray()));
+                    System.out.print("random: ");
+                    System.out.println(random);
+
+                    System.out.print("random -elem: ");
+                    System.out.println(random - elemNumber);
+
+                    System.out.print("random + col -elem: ");
+                    System.out.println(random + col - elemNumber);
+
+                    System.out.print("find: ");
+                    System.out.println(sets.find(random + col - elemNumber));
                 }
-                System.out.println(Arrays.toString(wallList.toArray()));
-                System.out.println(sets.find(random + col - elemNumber));
             }
         }
     }
