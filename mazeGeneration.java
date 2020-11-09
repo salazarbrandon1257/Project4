@@ -2,10 +2,14 @@ import java.util.*;
 
 public class mazeGeneration{
     int elemNumber;
+    int row;
+    int col;
     ArrayList<Integer> wallList;
 
-    public mazeGeneration(int n){
-        elemNumber = n;
+    public mazeGeneration(int n, int m){
+        row = n;
+        col = m;
+        elemNumber = n * m;
         wallList = new ArrayList<>();
         for (int i = 0; i < n * 2; i++){
             wallList.add(i);
@@ -18,13 +22,24 @@ public class mazeGeneration{
         while (sets.find(elemNumber - 1) != 0){
             Random rand = new Random(); 
             int random = rand.nextInt((elemNumber * 2) - n) ; 
-            if (random % 4 != 0 && random < elemNumber){
+            if (random % row != 0 && random < elemNumber){
                 if (sets.find(random - 1) != sets.find(random)){
                     sets.union(random - 1, random);
                     wallList.remove(random);
                     n++;
                 }
                 System.out.println(Arrays.toString(wallList.toArray()));
+                System.out.println(sets.find(random));
+                break;
+            }
+            if (random < elemNumber - row){
+                if (sets.find(random - 1) != sets.find(random)){
+                    sets.union(random - 1, random);
+                    wallList.remove(random);
+                    n++;
+                }
+                System.out.println(Arrays.toString(wallList.toArray()));
+                System.out.println(sets.find(random));
                 break;
             }
         }
@@ -71,14 +86,13 @@ public class mazeGeneration{
  
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         Scanner myObj2 = new Scanner(System.in);  // Create a Scanner object
-        int elementNumber;
+ 
         System.out.print("Input a value for the row number(Integer < 20): ");
         String userInput = myObj.nextLine();  // Read user input
         System.out.print("Input a value for the column number(Integer < 20): ");
         String userInput2 = myObj2.nextLine();  // Read user input
-        elementNumber = Integer.parseInt(userInput) * Integer.parseInt(userInput2);
 
-        mazeGeneration maze = new mazeGeneration(elementNumber);
+        mazeGeneration maze = new mazeGeneration(Integer.parseInt(userInput), Integer.parseInt(userInput2));
         maze.generateMaze();
 
         //System.out.println(sets.find(1));
