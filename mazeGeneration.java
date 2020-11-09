@@ -53,10 +53,6 @@ public class mazeGeneration{
         System.out.print("walllist: ");
         System.out.println(Arrays.toString(wallList.toArray()));
     }
-//  _  _ 
-// |_ _
-// |_ 
-
     public void generateMaze(){
         DisjSets sets = new DisjSets(elemNumber);
         int count = 0;
@@ -73,8 +69,15 @@ public class mazeGeneration{
                     count++;
                     System.out.println(Arrays.toString(wallList.toArray()));
                     System.out.println(sets.find(random));
+                    System.out.print("sets.find(elem -1): ");
+                    System.out.println(sets.find(elemNumber - 1));
                 }
+                System.out.print("error here?: 1 ");
+                System.out.println(random);
             }
+            System.out.print("error here?: ");               
+            System.out.println(random);
+
             if (sets.find(elemNumber - 1) == 0){break;}
             if (random < elemNumber * 2 - col && random > elemNumber - 1){
                 if (sets.find(random - elemNumber) != sets.find(random + col - elemNumber)){
@@ -97,6 +100,7 @@ public class mazeGeneration{
                     System.out.print("find: ");
                     System.out.println(sets.find(random + col - elemNumber));
                 }
+                System.out.println("error here?: 2");
             }
         }
         mazeUi();
