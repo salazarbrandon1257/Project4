@@ -2,9 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class mazeGeneration{
+    int elemNumber;
+    ArrayList<Integer> wallList;
 
-    ArrayList<Integer> arrlist = new ArrayList<Integer>(5);
+    public mazeGeneration(int n){
+        elemNumber = n;
+        wallList = new ArrayList<>(n * 2);
+    }
+    public void generateMaze(){
+        DisjSets sets = new DisjSets(elemNumber);
+        while (sets.find(elemNumber) != 0){
 
+        }
+    }
 
     static class DisjSets
 {
@@ -48,18 +58,17 @@ public class mazeGeneration{
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         Scanner myObj2 = new Scanner(System.in);  // Create a Scanner object
         int elementNumber;
-        System.out.println("Input a value for the row number(Integer < 20): ");
+        System.out.print("Input a value for the row number(Integer < 20): ");
         String userInput = myObj.nextLine();  // Read user input
-        System.out.println("Input a value for the column number(Integer < 20): ");
+        System.out.print("Input a value for the column number(Integer < 20): ");
         String userInput2 = myObj2.nextLine();  // Read user input
-
         elementNumber = Integer.parseInt(userInput) * Integer.parseInt(userInput2);
-        System.out.println(elementNumber);
 
-        DisjSets sets = new DisjSets(elementNumber);
-        System.out.println(sets.find(1));
-        sets.union(0, 1);
-        System.out.println(sets.find(1));
+        mazeGeneration maze = new mazeGeneration(elementNumber);
+
+        //System.out.println(sets.find(1));
+        sets.union(1, 8);
+        //System.out.println(sets.find(8));
         
 
     } 
