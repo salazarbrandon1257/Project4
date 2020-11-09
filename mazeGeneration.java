@@ -40,8 +40,11 @@ public class mazeGeneration{
             else if (counter[i] == 3){
                 System.out.print("|_ ");
             }
+            else if (counter[i] == 0){
+                System.out.print("   ");
+            }
             if (i % col == col - 1){
-                System.out.println("");
+                System.out.println("|");
             }
         }
         System.out.println("");
